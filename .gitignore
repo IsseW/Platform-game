@@ -4,3 +4,5 @@
 !.gitignore
 !/Assets/
 !/ProjectSettings/
+!Platform-game.sln
+!Assembly-Csharp.csproj

@@ -7,11 +7,13 @@ public class CameraController : MonoBehaviour
 {
     private new Camera camera;
 
+    public static CameraController Instance { get; private set; }
 
     public AnimationCurve cameraShakeCurve;
 
     private void Start()
     {
+        Instance = this;
         camera = GetComponent<Camera>();
         cameraRect = GetCurrentCameraRect();
     }
@@ -142,4 +144,14 @@ public class CameraController : MonoBehaviour
             Gizmos.DrawWireCube(new Vector3(cameraRect.center.x, cameraRect.center.y, transform.position.z), new Vector3(cameraRect.width, cameraRect.height, 0));
         }
     }
+
+
+    public void SetRoom(BoxCollider2D collider)
+    {
+        Rect rect = new Rect(collider.bounds.min, collider.bounds.max - collider.bounds.min);
+        float aspect = (float)rect.width / rect.height;
+        SetCameraRect();
+    }
+
+    
 }

@@ -11,21 +11,21 @@ public class WaveMovement : EnemyMovement
 
     public override Vector2 GetPosition(float time)
     {
-        return horizontal ? new Vector2() : Vector2.zero;
+        return horizontal ? new Vector2(startPos.x + time * period, startPos.y + Mathf.Sin(time) * amplitude) : new Vector2(startPos.y + Mathf.Sin(time) * amplitude, startPos.x + time * period);
     }
 
     public override Vector2 GetPosition()
     {
-        throw new System.NotImplementedException();
+        return transform.position;
     }
 
     public override void OnTick()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void SetPosition(Vector2 pos)
     {
-        throw new System.NotImplementedException();
+        transform.position = pos;
     }
 }

@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
         {
             onDeath = new UnityEvent();
         }
+        movement.StartMovement();
     }
 
     [SerializeField] private float maxHP;
@@ -43,6 +44,16 @@ public class Enemy : MonoBehaviour
                 OnDamage();
             }
         }
+    }
+
+    protected void Update()
+    {
+        
+    }
+
+    protected virtual void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 
     protected virtual void OnDamage()
@@ -84,9 +95,16 @@ public abstract class EnemyMovement : MonoBehaviour
 
     public abstract void OnTick();
 
-    protected void Start()
+    Coroutine coroutine;
+
+    public void StartMovement()
     {
-        StartCoroutine(Movement());
+        coroutine = StartCoroutine(Movement());
+    }
+    
+    public void StopMovement()
+    {
+        StopCoroutine(coroutine);
     }
 
     private IEnumerator Movement()

@@ -64,10 +64,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Isidor\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Isidor\Scripts\Enemy\Movement Patterns\LinearMovement.cs" />
+    <Compile Include="Assets\Isidor\Scripts\Enemy\Movement Patterns\WalkBetweenPoints.cs" />
     <Compile Include="Assets\Isidor\Scripts\input\Activator.cs" />
     <Compile Include="Assets\Isidor\Scripts\input\CameraController.cs" />
     <Compile Include="Assets\Isidor\Scripts\input\InputSystem.cs" />
-    <Compile Include="Assets\Isidor\Scripts\input\ScreenRect.cs" />
+    <Compile Include="Assets\Isidor\Scripts\input\Room.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/isidor.nielsen.LEARNET/Documents/GitHub/Platform game/Platform-game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

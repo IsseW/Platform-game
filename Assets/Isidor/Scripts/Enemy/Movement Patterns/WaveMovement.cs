@@ -11,7 +11,7 @@ public class WaveMovement : EnemyMovement
 
     public override Vector2 GetPosition(float time)
     {
-        return horizontal ? new Vector2(startPos.x + time * period, startPos.y + Mathf.Sin(time) * amplitude) : new Vector2(startPos.y + Mathf.Sin(time) * amplitude, startPos.x + time * period);
+        return horizontal ? new Vector2(startPos.x + time * period, startPos.y + Mathf.Sin(time) * amplitude) : new Vector2(startPos.x + Mathf.Sin(time) * amplitude, startPos.y + time * period);
     }
 
     public override Vector2 GetPosition()

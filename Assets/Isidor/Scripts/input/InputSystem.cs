@@ -109,7 +109,7 @@ public class InputSystem : MonoBehaviour
         return Input.GetKeyUp(jumpKey);
     }
 
-    public float Horizontal()
+    public static float Horizontal()
     {
         return Right() ? 1 : Left() ? -1 : 0;
     }

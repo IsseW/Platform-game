@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearMovement : EnemyMovement
+public class WaveMovement : EnemyMovement
 {
+    public bool horizontal;
     public Vector2 startPos;
-    public Vector2 direction;
-    public float speed;
+    public float amplitude; // height of wave
+    public float period; // length of a wave
 
     public override Vector2 GetPosition(float time)
     {
-        return startPos + direction.normalized * time * speed;
+        return horizontal ? new Vector2(startPos.x + time * period, startPos.y + Mathf.Sin(time) * amplitude) : new Vector2(startPos.y + Mathf.Sin(time) * amplitude, startPos.x + time * period);
     }
 
     public override Vector2 GetPosition()
@@ -20,7 +21,7 @@ public class LinearMovement : EnemyMovement
 
     public override void OnTick()
     {
-        
+
     }
 
     public override void SetPosition(Vector2 pos)

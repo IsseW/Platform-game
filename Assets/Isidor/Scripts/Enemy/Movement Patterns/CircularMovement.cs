@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearMovement : EnemyMovement
+public class CircularMovement : EnemyMovement
 {
-    public Vector2 startPos;
-    public Vector2 direction;
-    public float speed;
+    public Vector2 center;
+    public Vector2 size;
 
     public override Vector2 GetPosition(float time)
     {
-        return startPos + direction.normalized * time * speed;
+        return new Vector2(Mathf.Cos(time) * size.x + center.x, Mathf.Sin(time) * size.y + center.y);
     }
 
     public override Vector2 GetPosition()
@@ -20,7 +19,7 @@ public class LinearMovement : EnemyMovement
 
     public override void OnTick()
     {
-        
+
     }
 
     public override void SetPosition(Vector2 pos)

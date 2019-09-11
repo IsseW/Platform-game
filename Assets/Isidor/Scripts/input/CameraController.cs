@@ -277,10 +277,16 @@ public class CameraController : MonoBehaviour
             currentRoom = newRoom;
             SetCameraRect(newRoom.rect);
         }
+        else
+        {
+            currentRoom = null;
+        }
     }
 
     private IEnumerator FadeBetweenRooms(Room from, Room to)
     {
+        currentRoom = to;
+        SetCameraRect(to.rect);
         yield return null;
     }
 

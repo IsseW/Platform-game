@@ -20,7 +20,7 @@ public class LinearMovement : EnemyMovement
 
     public override void OnTick()
     {
-
+        
     }
 
     public override void SetPosition(Vector2 pos)

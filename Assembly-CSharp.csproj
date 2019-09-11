@@ -69,7 +69,7 @@
     <Compile Include="Assets\Isidor\Scripts\input\CameraController.cs" />
     <Compile Include="Assets\Isidor\Scripts\input\InputSystem.cs" />
     <Compile Include="Assets\Isidor\Scripts\input\Room.cs" />
-    <Compile Include="Assets\Samuel\Scripts\NewBehaviourScript.cs" />
+    <Compile Include="Assets\Samuel\Scripts\PlayerMovement.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/isidor.nielsen.LEARNET/Documents/GitHub/Platform game/Platform-game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

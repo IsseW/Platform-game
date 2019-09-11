@@ -9,7 +9,18 @@ public class CameraController : MonoBehaviour
 
     public static CameraController Instance { get; private set; }
 
-    public AnimationCurve cameraShakeCurve;
+    [SerializeField] private AnimationCurve cameraShakeCurve;
+
+    [SerializeField] private SpriteRenderer background;
+    float imageWidth;
+    float imageHeight;
+
+    public void SetBackground(Sprite image)
+    {
+        background.sprite = image;
+        imageWidth = image.bounds.extents.x * 2;
+        imageHeight = image.bounds.extents.y * 2;
+    }
 
     private void Start()
     {

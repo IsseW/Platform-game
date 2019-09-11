@@ -48,12 +48,12 @@ public class Enemy : MonoBehaviour
 
     protected void Update()
     {
-        
+        TryAttack();
     }
-
-    protected virtual void Attack()
+    
+    protected virtual void TryAttack()
     {
-        animator.SetTrigger("Attack");
+        
     }
 
     protected virtual void OnDamage()

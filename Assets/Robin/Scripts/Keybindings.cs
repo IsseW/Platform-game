@@ -14,7 +14,7 @@ public class Keybindings : MonoBehaviour
 
   public void BmoveLeftClick()
   {
-        BmoveLeft.SetEnabled(false);
+        BmoveLeft.interactable = false;
 
 
   }

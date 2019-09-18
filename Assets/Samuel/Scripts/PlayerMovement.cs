@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
+    public bool isGrounded = false;
+    public float jumpForce = 5f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,9 +21,9 @@ public class PlayerMovement : MonoBehaviour
     
     void Jump()
     {
-        if(InputSystem.JumpDown())
+        if(InputSystem.JumpDown() && isGrounded == true)
         {
-            rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
         
     }

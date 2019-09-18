@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public bool isGrounded = false;
     public float jumpForce = 5f;
+    public Transform firePoint;
+    public LinearMovement bullet;
+    private bool m_FacingRight;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -15,8 +19,26 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        float direction = InputSystem.Horizontal() * moveSpeed * Time.deltaTime;
+
         Jump();
-        rb.position += new Vector2(InputSystem.Horizontal() * moveSpeed * Time.deltaTime, 0f);
+
+        rb.position += new Vector2(direction, 0f);
+
+        if(direction > 0 && m_FacingRight)
+        {
+            Flip();
+        }
+        else if (direction < 0 && !m_FacingRight)
+        {
+            Flip();
+        }
+
+        if (InputSystem.AttackDown())
+        {
+            Shoot();
+        }
+
     }
     
     void Jump()
@@ -26,5 +48,20 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
         
+    }
+
+    void Shoot()
+    {
+        LinearMovement t = Instantiate(bullet, firePoint.position, firePoint.rotation);
+        t.startPos = firePoint.position;
+        t.direction = firePoint.right;
+        t.StartMovement();
+    }
+
+    private void Flip()
+    {
+        m_FacingRight = !m_FacingRight;
+
+        transform.Rotate(0f, 180f, 0f);
     }
 }

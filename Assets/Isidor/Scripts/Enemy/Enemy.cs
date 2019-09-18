@@ -90,6 +90,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private UnityEvent onDeath;
 }
 
+class EnemyStates
+{
+
+}
+
 public abstract class EnemyMovement : MonoBehaviour
 {
     [HideInInspector] public Enemy parent;

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded = false;
     public float jumpForce = 5f;
     public Transform firePoint;
-    public LinearMovement bullet;
+    public Projectile bullet;
     private bool m_FacingRight;
 
     void Start()
@@ -33,8 +33,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Flip();
         }
-
-        if (InputSystem.AttackDown())
+        if (InputSystem.Attack())
         {
             Shoot();
         }
@@ -52,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Shoot()
     {
-        LinearMovement t = Instantiate(bullet, firePoint.position, firePoint.rotation);
+        Projectile t = Instantiate(bullet, firePoint.position, firePoint.rotation);
         t.startPos = firePoint.position;
         t.direction = firePoint.right;
         t.StartMovement();

@@ -4,7 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Audio;
 
-public class Enemy : MonoBehaviour
+public abstract class Thing : MonoBehaviour
+{
+
+}
+
+public class Enemy : Thing
 {
     public Animator animator;
 
@@ -104,7 +109,7 @@ class EnemyState
 
 public abstract class Movement : MonoBehaviour
 {
-    [HideInInspector] public Enemy parent;
+    [HideInInspector] public Thing parent;
     public float timeScale = 1;
     protected Vector2 lastPosition { get; private set; }
 

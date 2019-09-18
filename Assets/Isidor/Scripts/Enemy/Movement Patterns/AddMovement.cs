@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddMovement : EnemyMovement
+public class AddMovement : Movement
 {
     public override void StartMovement()
     {
@@ -16,7 +16,7 @@ public class AddMovement : EnemyMovement
         }
     }
 
-    public EnemyMovement[] movements;
+    public Movement[] movements;
 
     public override Vector2 GetPosition(float time)
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkBetweenPoints : EnemyMovement
+public class WalkBetweenPoints : Movement
 {
     public Vector2[] points; //Points to cycle through
     public float cycleLength; //Time of going from cycling through all points

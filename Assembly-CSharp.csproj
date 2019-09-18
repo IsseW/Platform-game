@@ -78,6 +78,7 @@
     <Compile Include="Assets\Robin\Scripts\TEST.cs" />
     <Compile Include="Assets\Samuel\Scripts\GroundCheck.cs" />
     <Compile Include="Assets\Samuel\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Samuel\Scripts\Projectile.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

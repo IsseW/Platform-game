@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
 
-    public EnemyMovement movement;
+    public Movement movement;
 
     [System.Serializable]
     public class EnemySounds
@@ -95,7 +95,14 @@ class EnemyStates
 
 }
 
-public abstract class EnemyMovement : MonoBehaviour
+[System.Serializable]
+class EnemyState
+{
+    public float hpToActive;
+    public Movement movement;
+}
+
+public abstract class Movement : MonoBehaviour
 {
     [HideInInspector] public Enemy parent;
     public float timeScale = 1;
@@ -122,7 +129,7 @@ public abstract class EnemyMovement : MonoBehaviour
 
     public virtual void StartMovement()
     {
-        coroutine = StartCoroutine(Movement());
+        coroutine = StartCoroutine(Move());
     }
 
     public virtual void StopMovement()
@@ -130,7 +137,7 @@ public abstract class EnemyMovement : MonoBehaviour
         StopCoroutine(coroutine);
     }
 
-    private IEnumerator Movement()
+    private IEnumerator Move()
     {
         float time = 0;
         while (true)

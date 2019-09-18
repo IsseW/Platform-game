@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircularMovement : EnemyMovement
+public class CircularMovement : Movement
 {
     public Vector2 center;
     public Vector2 size;

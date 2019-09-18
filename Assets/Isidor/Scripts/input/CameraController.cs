@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
     private new Camera camera;
+    public Camera GetCamera()
+    {
+        return camera;
+    }
 
     public static CameraController Instance { get; private set; }
 
@@ -24,10 +29,38 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        if (background != null && background.sprite != null)
+        {
+            imageWidth = background.sprite.bounds.extents.x * 2;
+            imageHeight = background.sprite.bounds.extents.y * 2;
+        }
         Instance = this;
         camera = GetComponent<Camera>();
         cameraRect = GetCurrentCameraRect();
         rooms = new RoomStack();
+        if (onCameraChanged == null)
+        {
+            onCameraChanged = new CameraChangedEvent();
+        }
+        onCameraChanged.AddListener(UpdateOverlays);
+        onCameraChanged.AddListener(UpdateBackground);
+    }
+
+    public void UpdateBackground(Rect rect)
+    {
+        if (imageHeight > 0 && imageWidth > 0)
+        {
+            if (rect.width > rect.height * imageWidth / imageHeight)
+            {
+                float f = rect.width / imageWidth;
+                background.gameObject.transform.localScale = new Vector3(f, f);
+            }
+            else
+            {
+                float f = rect.height / imageHeight;
+                background.gameObject.transform.localScale = new Vector3(f, f);
+            }
+        }
     }
 
     [System.Serializable]
@@ -86,20 +119,16 @@ public class CameraController : MonoBehaviour
         {
             CameraShake(5, 1);
         }
-
-        if (transform.hasChanged && updateOverlays)
-        {
-            transform.hasChanged = false;
-            UpdateOverlays();
-        }
     }
     private bool updateOverlays = true;
 
-    private void UpdateOverlays()
+    private void UpdateOverlays(Rect rect)
     {
+        if (!updateOverlays) return;
+        
         if (currentRoom != null)
         {
-            Rect rect = GetCurrentCameraRect();
+            rect = GetCurrentCameraRect();
             float scale = camera.WorldToScreenPoint(rect.min + Vector2.right).x;
             overlays.SetLeft(currentRoom.rect.xMin - rect.xMin, scale);
             overlays.SetRight(currentRoom.rect.xMax - rect.xMax, scale);
@@ -165,6 +194,16 @@ public class CameraController : MonoBehaviour
         return new Rect(left, top, halfWidth * 2, camera.orthographicSize * 2);
     }
 
+    public class CameraChangedEvent : UnityEvent<Rect>
+    {
+        public CameraChangedEvent() : base()
+        {
+
+        }
+    }
+
+    public CameraChangedEvent onCameraChanged;
+
     public void SetTempCameraRect(Rect rect)
     {
         SetPosition(rect.center);
@@ -180,6 +219,7 @@ public class CameraController : MonoBehaviour
             camera.orthographicSize = rect.height / 2;
         }
 
+        onCameraChanged.Invoke(rect);
     }
 
     public void FixCamera()

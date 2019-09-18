@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class WaveMovement : EnemyMovement
 {
-    public bool horizontal;
+    public Vector2 direction;
     public Vector2 startPos;
     public float amplitude; // height of wave
     public float period; // length of a wave
 
     public override Vector2 GetPosition(float time)
     {
-        return horizontal ? new Vector2(startPos.x + time * period, startPos.y + Mathf.Sin(time) * amplitude) : new Vector2(startPos.y + Mathf.Sin(time) * amplitude, startPos.x + time * period);
+        direction = direction.normalized;
+        return direction * time * period + Vector2.Perpendicular(direction) * Mathf.Sin(time) * amplitude + startPos;
     }
 
     public override Vector2 GetPosition()

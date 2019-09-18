@@ -13,16 +13,27 @@ public class Room : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         collider.isTrigger = true;
         rect = new Rect(this.collider.bounds.min, this.collider.bounds.max - this.collider.bounds.min);
+        ToggleChildren(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         CameraController.Instance.PushRoom(this);
+        ToggleChildren(true);
+    }
+
+    private void ToggleChildren(bool active)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(active);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         CameraController.Instance.PopRoom(this);
+        ToggleChildren(false);
     }
 
     private void OnDrawGizmos()

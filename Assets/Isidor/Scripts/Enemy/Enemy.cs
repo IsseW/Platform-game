@@ -2,12 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Audio;
 
 public class Enemy : MonoBehaviour
 {
     public Animator animator;
 
     public EnemyMovement movement;
+
+    [System.Serializable]
+    public class EnemySounds
+    {
+        public AudioClip passiveSound;
+        public AudioClip hurtSound;
+        public AudioClip dieSound;
+        public AudioClip attackSound;
+    }
+
+    [SerializeField] protected EnemySounds sounds;
 
     private void Start()
     {
@@ -21,11 +33,11 @@ public class Enemy : MonoBehaviour
         {
             onDeath = new UnityEvent();
         }
-        movement.StartMovement();
+        if (movement != null) movement.StartMovement();
     }
 
     [SerializeField] private float maxHP;
-    public float HP;
+    [HideInInspector] public float HP;
 
     public bool dead => HP <= 0;
 
@@ -59,6 +71,12 @@ public class Enemy : MonoBehaviour
     protected virtual void OnDamage()
     {
         animator.SetTrigger("Damage");
+
+        if (sounds.hurtSound)
+        {
+            
+        }
+
         onDamage.Invoke();
     }
 
@@ -74,7 +92,7 @@ public class Enemy : MonoBehaviour
 
 public abstract class EnemyMovement : MonoBehaviour
 {
-    public Enemy parent;
+    [HideInInspector] public Enemy parent;
     public float timeScale = 1;
     protected Vector2 lastPosition { get; private set; }
 
@@ -97,12 +115,12 @@ public abstract class EnemyMovement : MonoBehaviour
 
     Coroutine coroutine;
 
-    public void StartMovement()
+    public virtual void StartMovement()
     {
         coroutine = StartCoroutine(Movement());
     }
-    
-    public void StopMovement()
+
+    public virtual void StopMovement()
     {
         StopCoroutine(coroutine);
     }
@@ -110,7 +128,7 @@ public abstract class EnemyMovement : MonoBehaviour
     private IEnumerator Movement()
     {
         float time = 0;
-        while (!parent.dead)
+        while (true)
         {
             lastPosition = GetPosition();
             SetPosition(GetPosition(time));

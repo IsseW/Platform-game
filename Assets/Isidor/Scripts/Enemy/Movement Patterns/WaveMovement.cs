@@ -29,4 +29,12 @@ public class WaveMovement : Movement
     {
         transform.position = pos;
     }
+
+    public override void Setup(params object[] objects)
+    {
+        if (objects.Length > 0) startPos = (Vector2)objects[0];
+        if (objects.Length > 1) direction = (Vector2)objects[1];
+        if (objects.Length > 2) amplitude = (float)objects[2];
+        if (objects.Length > 3) period = (float)objects[3];
+    }
 }

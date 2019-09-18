@@ -29,4 +29,12 @@ public class WalkBetweenPoints : Movement
     {
         transform.position = pos;
     }
+
+    public override void Setup(params object[] objects)
+    {
+        if (objects.Length > 0) points = (Vector2[])objects[0];
+        if (objects.Length > 1) cycleLength = (float)objects[1];
+    }
+
+
 }

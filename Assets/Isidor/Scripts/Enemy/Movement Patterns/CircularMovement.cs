@@ -26,4 +26,10 @@ public class CircularMovement : Movement
     {
         transform.position = pos;
     }
+
+    public override void Setup(params object[] objects)
+    {
+        if (objects.Length > 0) center = (Vector2)objects[0];
+        if (objects.Length > 1) size = (Vector2)objects[1];
+    }
 }

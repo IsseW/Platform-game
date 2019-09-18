@@ -113,6 +113,8 @@ public abstract class Movement : MonoBehaviour
     public float timeScale = 1;
     protected Vector2 lastPosition { get; private set; }
 
+    public abstract void Setup(params object[] objects);
+
     /// <summary>
     /// Get position at the given time
     /// </summary>

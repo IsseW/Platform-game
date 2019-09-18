@@ -42,4 +42,9 @@ public class AddMovement : Movement
     {
         transform.position = pos;
     }
+
+    public override void Setup(params object[] objects)
+    {
+        movements = (Movement[])objects[0];
+    }
 }

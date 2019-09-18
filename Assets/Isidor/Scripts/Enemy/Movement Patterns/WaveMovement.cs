@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveMovement : EnemyMovement
+public class WaveMovement : Movement
 {
     public Vector2 direction;
     public Vector2 startPos;

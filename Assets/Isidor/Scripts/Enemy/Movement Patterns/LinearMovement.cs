@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearMovement : EnemyMovement
+public class LinearMovement : Movement
 {
     public Vector2 startPos;
     public Vector2 direction;
